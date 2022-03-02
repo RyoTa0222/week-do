@@ -35,7 +35,7 @@ const Button: React.FC<Props> = ({
   }, [processing])
   return (
     <button
-      className={`${className} ${baseStyle} ${cursorStyle} ${processingStyle} max-w-xl w-full rounded-full py-2.5 sm:text-sm`}
+      className={`${className} ${baseStyle} ${cursorStyle} ${processingStyle} max-w-xl w-full rounded-full py-2.5 sm:text-sm flex justify-center items-center`}
       onClick={handleClick}
       disabled={disabled}
     >

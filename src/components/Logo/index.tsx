@@ -28,6 +28,7 @@ const Logo: React.VFC<Props> = ({ type = 'large' }) => {
         alt="week do"
         width={size.width}
         height={size.height}
+        unoptimized={process.env.NODE_ENV === 'development'}
       />
       WeekDo
     </span>
