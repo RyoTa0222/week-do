@@ -8,6 +8,7 @@ interface Props {
   disabled?: boolean
   processing?: boolean
   className?: string
+  'data-testid'?: string
 }
 
 const Button: React.FC<Props> = ({
@@ -17,6 +18,7 @@ const Button: React.FC<Props> = ({
   disabled = false,
   processing = false,
   className = '',
+  ...args
 }) => {
   const baseStyle = useMemo(() => {
     switch (type) {
@@ -38,6 +40,7 @@ const Button: React.FC<Props> = ({
       className={`${className} ${baseStyle} ${cursorStyle} ${processingStyle} max-w-xl w-full rounded-full py-2.5 sm:text-sm flex justify-center items-center`}
       onClick={handleClick}
       disabled={disabled}
+      data-testid={args['data-testid'] ?? ''}
     >
       {children}
     </button>

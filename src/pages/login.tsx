@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import Button from '@/components/Button'
 import Logo from '@/components/Logo'
-import { useState, ChangeEvent, memo } from 'react'
+import { useState, ChangeEvent, memo, useMemo } from 'react'
 import useToggle from '@/hooks/useToggle'
 import { IoMdEye, IoIosEyeOff } from 'react-icons/io'
 import Pressable from '@/components/Pressable'
@@ -30,6 +30,11 @@ const Login: NextPage = () => {
   const handleChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value)
   }
+  // ボタンが活性状態かどうか
+  const isDisabled = useMemo(() => {
+    return !(email && password)
+  }, [email, password])
+  // ログイン処理
   const submit = (e: any) => {
     e.preventDefault()
     if (email && password) {
@@ -52,6 +57,7 @@ const Login: NextPage = () => {
           id="email"
           name="email"
           value={email}
+          data-testid="login-email-form"
           required
           onChange={handleChangeEmail}
           className="block border border-gray-900 focus:border-red-300 rounded w-full px-4 py-2"
@@ -66,6 +72,7 @@ const Login: NextPage = () => {
             id="password"
             name="password"
             value={password}
+            data-testid="login-password-form"
             required
             onChange={handleChangePassword}
             className="block border border-gray-900 focus:border-red-300 rounded w-full px-4 py-2"
@@ -77,7 +84,12 @@ const Login: NextPage = () => {
             <EyeIcon visible={isMasked} />
           </Pressable>
         </div>
-        <Button handleClick={() => {}} className="my-10">
+        <Button
+          handleClick={() => {}}
+          className="my-10"
+          disabled={isDisabled}
+          data-testid="login-button"
+        >
           次へ
         </Button>
       </form>
